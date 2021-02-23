@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 
@@ -8,8 +7,11 @@ function App() {
     <Folder name="Desktop">
       <Folder name="Grand Theft Auto V">
         <File name="GTA.exe"/>
-        <File name="settings.xml"/> 
+        <File name="settings.xml"/>
+
       </Folder>
+      <File name="React Tutorial.mp4"/>
+      <File name="Levels.mp3"/> 
       <File name="Microsoft Edge.exe"/>
       <File name="Photo.png"/>
     </Folder>
@@ -28,7 +30,12 @@ const Folder =(props) =>{
   }
 
   return <div>
-    <span onClick={handleClick}>{name}</span>     {/* {function} pass the entire function as a prop. {function()} pass the return value of the function */}
+    <span onClick={handleClick}>                        {/* {function} pass the entire function as a prop. {function()} pass the return value of the function */}
+
+      <i className="orange folder icon"></i>
+      {isOpen ? <i className="caret down icon" ></i> : <i className="caret right icon" ></i>}
+      {name}
+    </span>     
     <div style={{marginLeft:'20px'}}>
       {isOpen ? children : null}
     </div>
@@ -36,7 +43,16 @@ const Folder =(props) =>{
 }
 
 const File = (props)=>{
-  return <div>{props.name}</div>;
+  const {name} = props;
+  const fileExtension = name.split('.')[1];
+  const fileIcons = {
+    "mp4" : "file video icon",
+    "mp3" : "file audio icon",
+    "png" : "file image icon",
+    "exe" : "edge icon"
+  };
+  
+  return <div><i className={fileIcons[fileExtension]}></i>{name}</div>;
 }
 
 
